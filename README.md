@@ -8,9 +8,10 @@ of order. It should be noted that it was only tested and supported for Linux bas
 #####To get started
 
 From your console
-    1. sudo chmod +x setup
-    2. sudo ./setup
-    3. python QEDownloader.py    
+
+1. sudo chmod +x setup
+2. sudo ./setup
+3. python QEDownloader.py    
 
 Configuring Cups-pdf to be your only printer is required for it to work
   1. sudo gpasswd -a username lpadmin
