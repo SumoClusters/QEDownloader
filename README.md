@@ -5,7 +5,7 @@ I couldn't get the merge pdf section to work out; for some reason it would join 
 of order. It should be noted that it is only tested and supported for Linux based OS.
 
 
-To get started
+#####To get started
 
 From your console
     1. sudo chmod +x setup
@@ -22,7 +22,7 @@ Configuring Cups-pdf to be your only printer is required for it to work
   7. Click Continue
 
 
-What to expect on first run
+######What to expect on first run
 
 - It will ask you for your ITT username and password. 
 - It will automatically delete the username and password once used to login. 
