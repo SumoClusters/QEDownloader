@@ -11,9 +11,9 @@ From your console
 
 1. sudo chmod +x setup
 2. sudo ./setup
-3. python QEDownloader.py    
+3. python QEDownloader.py
 
-Configuring Cups-pdf to be your only printer is required for it to work
+#####Configuring Cups-pdf to be your only printer is required for it to work
   1. sudo gpasswd -a username lpadmin
   2. visit http://localhost:631/
   3. go to Adding Printers and Classes
