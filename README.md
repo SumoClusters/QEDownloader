@@ -22,12 +22,12 @@ Configuring Cups-pdf to be your only printer is required for it to work
   7. Click Continue
 
 
-######What to expect on first run
+#####What to expect on first run
 
 - It will ask you for your ITT username and password. 
 - It will automatically delete the username and password once used to login. 
 - It will use the class row you entered to find your class. You find this out on the 
-- Distance-learning website. 
+Distance-learning website. 
 - It will configure a separate firefox profile to silently print to pdf.
 - It will then open Firefox in an invisible browser.
 - I will then get the page numbers from Amazon, and then finally start
