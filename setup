@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# This will help install all requirements for running the program
+
+sudo apt-get install pip3 cups-pdf
+sudo pip3 install re selenium pyvirtualdisplay time os getpass beautifulsoup4 platform
