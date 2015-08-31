@@ -30,6 +30,6 @@ Configuring Cups-pdf to be your only printer is required for it to work
 Distance-learning website. 
 - It will configure a separate firefox profile to silently print to pdf.
 - It will then open Firefox in an invisible browser.
-- I will then get the page numbers from Amazon, and then finally start
-- to print the pages off 10 at a time. 
+- It will then get the page numbers from Amazon, and then finally start
+ to print the pages off 10 at a time. 
 - Feel free to do stuff while it does its thing. 
