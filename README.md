@@ -1,4 +1,4 @@
-##Welcome to Questa Ebook Downloader!
+##Welcome to 'Q' Ebook Downloader!
 
 I created this program because I was fed up with ITT's online ebook reader.
 I couldn't get the merge pdf section to work out; for some reason it would join them out

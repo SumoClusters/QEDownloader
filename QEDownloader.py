@@ -1,4 +1,23 @@
 __author__ = 'SumoClusters'
+"""
+    <A Program to automatically download ITTT Ebooks>
+    Copyright (C) <2015>  <SumoClusters>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+"""
+
 # from PyPDF2 import PdfFileMerger, PdfFileReader
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
@@ -12,9 +31,11 @@ import os
 import platform
 import getpass
 
+
+
 def main():
-    print("         Welcome to Questa Downloader!")
-    print("This will allow you to download PDF files from ITT Tech!")
+    print("         Welcome to 'Q' Downloader!")
+    print("This will allow you to download PDF files from ITTT!")
     print("We will need your Login credentials to proceed.")
     print("  We will destroy the credentials upon use, don't worry.")
     username = input("Login: ")
