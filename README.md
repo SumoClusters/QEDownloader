@@ -1,6 +1,6 @@
 ##Welcome to 'Q' Ebook Downloader!
 
-I created this program because I was fed up with ITT's online ebook reader.
+I created this program because I was fed up with ITTT's online ebook reader.
 I couldn't get the merge pdf section to work out; for some reason it would join them out
 of order. It should be noted that it was only tested and supported for Linux based OS.
 
@@ -25,7 +25,7 @@ From your console
 
 #####What to expect on first run
 
-- It will ask you for your ITT username and password. 
+- It will ask you for your ITTT username and password. 
 - It will automatically delete the username and password once used to login. 
 - It will use the class row you entered to find your class. You find this out on the 
 Distance-learning website. 
