@@ -126,7 +126,7 @@ def main():
             driver.find_element_by_xpath("//input[@id='print_to']").send_keys(end)
             # Starts the print process
             driver.find_element_by_xpath("//button[contains(@class,'submit print_button')]").click()
-            time.sleep(15)
+            time.sleep(20)
             driver.switch_to.window(driver.window_handles[-1])
             driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 'w')
             for filename in os.listdir(pdf):
@@ -137,6 +137,9 @@ def main():
             filep = filen + str(filec) + ".pdf"
             begin += 10
             end += 10
+
+    print("Finished, enjoy your book! ^-^")
+
 """"
    doesn't work I Recommend third party software to merge the the pdfs
     print("Merging to PDF")
