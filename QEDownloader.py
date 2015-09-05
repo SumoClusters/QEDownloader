@@ -44,8 +44,8 @@ def main():
     whatclass -= 1
     home = expanduser("~")
     operatingsystem = platform.system()
-    display = Display(visible=0, size=(800, 600))  # These two lines make the browser invisible.
-    display.start()
+    #  display = Display(visible=0, size=(800, 600))  # These two lines make the browser invisible.
+    #  display.start()
     filen = 'a'  # base filename
     filec = 0  # filename counter
     filep = filen+str(filec)  # perfect filename
@@ -96,7 +96,7 @@ def main():
     begin = 0
     end = 10
     filen = 'a'  # base filename
-    filec = 0  # filename counter
+    filec = 0  # filename counterhttps://github.com/SumoClusters/QEDownloader.git
     filep = filen + str(filec) + ".pdf"  # perfect filename
     # The following will open the book in the main browser by using a CTRl + Left Click
     newtab = driver.find_element_by_xpath("//a[@class='solo root go']")
@@ -126,7 +126,7 @@ def main():
             driver.find_element_by_xpath("//input[@id='print_to']").send_keys(end)
             # Starts the print process
             driver.find_element_by_xpath("//button[contains(@class,'submit print_button')]").click()
-            time.sleep(12)
+            time.sleep(15)
             driver.switch_to.window(driver.window_handles[-1])
             driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 'w')
             for filename in os.listdir(pdf):
