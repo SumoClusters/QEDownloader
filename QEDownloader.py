@@ -131,12 +131,20 @@ def main():
             driver.find_element_by_xpath("//input[@id='printTo']").send_keys(end)
             # Starts the print process
             driver.find_element_by_xpath("//button[@class='submit ']").click()
+
             if pubrestriction == 0:
                 countdown(150)
             else:
                 countdown(20)
+
             filec += 1
             filep = filen + str(filec) + ".pdf"
+            driver.switch_to.window(driver.window_handles[-1])
+
+            for filename in os.listdir(pdf):
+                if filename.startswith(booktitle.split(' ', 1)[0]):
+                    os.rename(filename, filep)
+
             if pubrestriction >= 1:
                 begin += pubrestriction
                 end += pubrestriction
