@@ -37,7 +37,7 @@ def main():
     password = (getpass.getpass('Please Enter a Password: '))
     whatclass = int(input("Type what row your class is listed:  "))
     whatclass -= 1
-    useremail = dir(input("ter bookshelf email: "))
+    useremail = dir(input("Please enter bookshelf email: "))
     bookpass = getpass.getpass("Enter your Bookshelf Password")
 
     home = expanduser("~")
