@@ -18,41 +18,37 @@ __author__ = 'SumoClusters'
 
 """
 
-# from PyPDF2 import PdfFileMerger, PdfFileReader
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
-from pyvirtualdisplay import Display
+# from pyvirtualdisplay import Display
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from os.path import expanduser
 import re
 import time
 import os
-import platform
 import getpass
-
-
 
 def main():
     print("         Welcome to 'Q' Downloader!")
     print("This will allow you to download PDF files from ITTT!")
+    print("Before getting started, you must log in at least once for the new Bookshelf!")
     print("We will need your Login credentials to proceed.")
     print("  We will destroy the credentials upon use, don't worry.")
     username = input("Login: ")
     password = (getpass.getpass('Please Enter a Password: '))
     whatclass = int(input("Type what row your class is listed:  "))
     whatclass -= 1
+    useremail = dir(input("ter bookshelf email: "))
+    bookpass = getpass.getpass("Enter your Bookshelf Password")
+
     home = expanduser("~")
-    operatingsystem = platform.system()
-    #  display = Display(visible=0, size=(800, 600))  # These two lines make the browser invisible.
-    #  display.start()
     filen = 'a'  # base filename
     filec = 0  # filename counter
     filep = filen+str(filec)  # perfect filename
-    bstring = 'Print___'
     print("Configuring Firefox Profile")
     profile = webdriver.FirefoxProfile()
     profile.set_preference("print.always_print_silent", True)
+    profile.set_preference("browser.link.open_newwindow.restriction", 0)
     print("Starting Firefox")
     driver = webdriver.Firefox(profile)
     print("Travelling to Distance Education ITT Tech")
@@ -70,6 +66,7 @@ def main():
     print("Finding your class...")
     links[whatclass].click()
     booktitle = driver.find_element_by_class_name("CLiKSLpNrmlLnk_Ebook").text
+    print(booktitle.title())
     driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 'n')
     driver.switch_to.window(driver.window_handles[-1])
     print("Getting number of Pages...")
@@ -93,13 +90,13 @@ def main():
     driver.find_element_by_class_name("CLiKSLpNrmlLnk_Ebook").click()
     time.sleep(8)
     driver.switch_to.window(driver.window_handles[-1])
-    begin = 0
-    end = 10
+    begin = 1
+    end = 11
     filen = 'a'  # base filename
     filec = 0  # filename counterhttps://github.com/SumoClusters/QEDownloader.git
     filep = filen + str(filec) + ".pdf"  # perfect filename
-    # The following will open the book in the main browser by using a CTRl + Left Click
-    newtab = driver.find_element_by_xpath("//a[@class='solo root go']")
+    # The following doesn't work anymore with the updated interface
+    """newtab = driver.find_element_by_xpath("//a[@class='solo root go']")
     ActionChains(driver) \
         .key_down(Keys.CONTROL) \
         .click(newtab) \
@@ -108,31 +105,35 @@ def main():
     driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 'w')
     driver.switch_to.window(driver.window_handles[-1])
     driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 'w')
+   """
     pdf = home + "/PDF"
     if not os.path.exists(pdf):
         os.mkdir(pdf)
     os.chdir(pdf)  # goes to PDF directory
     time.sleep(10)
     loop = truepages - 5
-
-    if operatingsystem == 'Linux':
-        while begin < loop:
+    if driver.current_url == "http://itt-tech.vitalsource.com/#/user/signin":
+        driver.find_element_by_xpath("//input[@id='email-field']").send_keys(perfemail)
+        driver.find_element_by_xpath("//input[@id='password-field']").send_keys(bookpass)
+        driver.find_element_by_xpath("//input[@class='large-button']").click()
+        time.sleep(8)
+    driver.find_element_by_xpath("//button[@class='modal-x noButton']").click()
+    booktitle = booktitle.title()
+    while begin < loop:
             driver.switch_to.window(driver.window_handles[-1])
             print("Downloading section: " + str(begin) + " of " + str(end) + ". Out of: " + str(truepages))
-            driver.find_element_by_xpath("//button[@ga-label='Open Print Button']").click()
-            driver.find_element_by_xpath("//input[@id='print_from']").clear()
-            driver.find_element_by_xpath("//input[@id='print_from']").send_keys(begin)
-            driver.find_element_by_xpath("//input[@id='print_to']").clear()
-            driver.find_element_by_xpath("//input[@id='print_to']").send_keys(end)
+            driver.find_element_by_xpath("//button[@data-tooltip='Print Pages']").click()
+            driver.find_element_by_xpath("//input[@placeholder='Start']").clear()
+            driver.find_element_by_xpath("//input[@placeholder='Start']").send_keys(begin)
+            driver.find_element_by_xpath("//input[@id='printTo']").clear()
+            driver.find_element_by_xpath("//input[@id='printTo']").send_keys(end)
             # Starts the print process
-            driver.find_element_by_xpath("//button[contains(@class,'submit print_button')]").click()
-            time.sleep(20)
+            driver.find_element_by_xpath("//button[@class='submit ']").click()
+            time.sleep(25)
             driver.switch_to.window(driver.window_handles[-1])
-            driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 'w')
             for filename in os.listdir(pdf):
-                if filename.startswith(bstring):
+                if filename.startswith(booktitle.split(' ', 1)[0]):
                     os.rename(filename, filep)
-
             filec += 1
             filep = filen + str(filec) + ".pdf"
             begin += 10
@@ -174,4 +175,6 @@ if __name__ == '__main__':
     https://stackoverflow.com/questions/2759067/rename-files-in-python
     https://stackoverflow.com/questions/273192/in-python-check-if-a-directory-exists-and-create-it-if-necessary
     https://www.binpress.com/tutorial/manipulating-pdfs-with-python/167
+    https://support.mozilla.org/en-US/questions/1035103
+    https://stackoverflow.com/questions/14411028/python-printing-attributes-with-no-dict
 """
