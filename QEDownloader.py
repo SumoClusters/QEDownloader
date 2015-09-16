@@ -86,7 +86,7 @@ def main():
     print(truepages)
     driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 'w')
 
-    if pubrestriction > 1:
+    if pubrestriction >= 1:
         begin = 1
         end = begin + (pubrestriction - 1)
     elif pubrestriction == 0:
@@ -129,7 +129,7 @@ def main():
                     os.rename(filename, filep)
             filec += 1
             filep = filen + str(filec) + ".pdf"
-            if pubrestriction > 1:
+            if pubrestriction >= 1:
                 begin += pubrestriction
                 end += pubrestriction
             elif pubrestriction == 0:
