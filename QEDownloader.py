@@ -28,7 +28,9 @@ import time
 import os
 import getpass
 
+
 def main():
+
     print("         Welcome to 'Q' Downloader!")
     print("This will allow you to download PDF files from ITTT!")
     print("We will need your Login credentials to proceed.")
