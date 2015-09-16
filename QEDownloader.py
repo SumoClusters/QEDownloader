@@ -31,7 +31,6 @@ import getpass
 def main():
     print("         Welcome to 'Q' Downloader!")
     print("This will allow you to download PDF files from ITTT!")
-    print("Before getting started, you must log in at least once for the new Bookshelf!")
     print("We will need your Login credentials to proceed.")
     print("  We will destroy the credentials upon use, don't worry.")
     username = input("Login: ")
