@@ -23,7 +23,16 @@ import re
 import time
 import os
 import getpass
+import sys
 
+def countdown(t): # in seconds
+    print("Need to wait for download to finish.")
+    print("Will wait for 170 seconds if chosen unlimited, 20 if otherwise")
+    for i in range(t,0,-1):
+        print(' %d seconds' % i)
+        sys.stdout.flush()
+        time.sleep(1)
+    print("Finished downloading section, proceeding onwards.")
 
 def main():
     print("         Welcome to 'Q' Downloader!")
@@ -35,8 +44,8 @@ def main():
     whatclass = int(input("Type what row your class is listed:  "))
     whatclass -= 1
     useremail = dir(input("Please enter bookshelf email: "))
-    bookpass = getpass.getpass("Enter your Bookshelf Password")
-    pubrestriction = int(input("How many pages does the publisher allow to print at a time? (0 for unlimited)"))
+    bookpass = getpass.getpass("Enter your Bookshelf Password: ")
+    pubrestriction = int(input("How many pages does the publisher allow to print at a time? (0 for unlimited) "))
     home = expanduser("~")
     filen = 'a'  # base filename
     filec = 0  # filename counter
@@ -91,20 +100,20 @@ def main():
         end = begin + (pubrestriction - 1)
     elif pubrestriction == 0:
         begin = 1
-        end = truepages / 2
+        end = int(truepages / 2)
 
     print("Initializing Downloading Loop")
     # after amazon gets done with finding page count
     driver.switch_to.window(driver.window_handles[-1])
     driver.find_element_by_class_name("CLiKSLpNrmlLnk_Ebook").click()
-    time.sleep(8)
+    time.sleep(15)
     driver.switch_to.window(driver.window_handles[-1])
     pdf = home + "/PDF"
     if not os.path.exists(pdf):
         os.mkdir(pdf)
     os.chdir(pdf)  # goes to PDF directory
-    time.sleep(10)
     loop = truepages - 5
+    driver.switch_to.window(driver.window_handles[-1])
     if driver.current_url == "http://itt-tech.vitalsource.com/#/user/signin":
         driver.find_element_by_xpath("//input[@id='email-field']").send_keys(useremail)
         driver.find_element_by_xpath("//input[@id='password-field']").send_keys(bookpass)
@@ -122,22 +131,20 @@ def main():
             driver.find_element_by_xpath("//input[@id='printTo']").send_keys(end)
             # Starts the print process
             driver.find_element_by_xpath("//button[@class='submit ']").click()
-            time.sleep(25)
-            driver.switch_to.window(driver.window_handles[-1])
-            for filename in os.listdir(pdf):
-                if filename.startswith(booktitle.split(' ', 1)[0]):
-                    os.rename(filename, filep)
+            if pubrestriction == 0:
+                countdown(150)
+            else:
+                countdown(20)
             filec += 1
             filep = filen + str(filec) + ".pdf"
             if pubrestriction >= 1:
                 begin += pubrestriction
                 end += pubrestriction
             elif pubrestriction == 0:
-                begin += end + 1
+                begin += end
                 end2 = end
                 for i in range(end2, truepages):
-                    end = i
-
+                    end = i + 1
 
     print("Finished, enjoy your book! ^-^")
 
@@ -167,4 +174,5 @@ if __name__ == '__main__':
     https://support.mozilla.org/en-US/questions/1035103
     https://stackoverflow.com/questions/14411028/python-printing-attributes-with-no-dict
     http://pythoncentral.io/pythons-range-function-explained/
+    https://stackoverflow.com/questions/17220128/display-a-countdown-for-the-python-sleep-function
 """
