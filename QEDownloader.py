@@ -90,17 +90,6 @@ def main():
     filen = 'a'  # base filename
     filec = 0  # filename counterhttps://github.com/SumoClusters/QEDownloader.git
     filep = filen + str(filec) + ".pdf"  # perfect filename
-    # The following doesn't work anymore with the updated interface
-    """newtab = driver.find_element_by_xpath("//a[@class='solo root go']")
-    ActionChains(driver) \
-        .key_down(Keys.CONTROL) \
-        .click(newtab) \
-        .key_up(Keys.CONTROL) \
-        .perform()
-    driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 'w')
-    driver.switch_to.window(driver.window_handles[-1])
-    driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 'w')
-   """
     pdf = home + "/PDF"
     if not os.path.exists(pdf):
         os.mkdir(pdf)
@@ -136,17 +125,6 @@ def main():
 
     print("Finished, enjoy your book! ^-^")
 
-""""
-   doesn't work I Recommend third party software to merge the the pdfs
-    print("Merging to PDF")
-    merger = PdfFileMerger()
-    files = [x for x in os.listdir(pdf) if x.endswith(".pdf")]
-    for fname in sorted(files):
-        merger.append(PdfFileReader(open(os.path.join(pdf, fname), 'rb')))
-    merger.write(booktitle+'.pdf')
-    name = booktitle+'.pdf'
-    print("Extracting Headers from penultimate PDF")
-"""
 if __name__ == '__main__':
     main()
 
