@@ -114,7 +114,7 @@ def main():
     time.sleep(10)
     loop = truepages - 5
     if driver.current_url == "http://itt-tech.vitalsource.com/#/user/signin":
-        driver.find_element_by_xpath("//input[@id='email-field']").send_keys(perfemail)
+        driver.find_element_by_xpath("//input[@id='email-field']").send_keys(useremail)
         driver.find_element_by_xpath("//input[@id='password-field']").send_keys(bookpass)
         driver.find_element_by_xpath("//input[@class='large-button']").click()
         time.sleep(8)
