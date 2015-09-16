@@ -3,4 +3,4 @@
 # This will help install all requirements for running the program
 
 sudo apt-get install python3 python3-pip cups-pdf
-sudo pip3 install selenium 
+sudo pip3 install selenium beautifulsoup4 
