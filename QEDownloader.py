@@ -36,16 +36,20 @@ def main():
     whatclass -= 1
     useremail = dir(input("Please enter bookshelf email: "))
     bookpass = getpass.getpass("Enter your Bookshelf Password")
+    pubrestriction = int(input("How many pages does the publisher allow to print at a time? (0 for unlimited)"))
     home = expanduser("~")
     filen = 'a'  # base filename
     filec = 0  # filename counter
     filep = filen+str(filec)  # perfect filename
+
     print("Configuring Firefox Profile")
     profile = webdriver.FirefoxProfile()
     profile.set_preference("print.always_print_silent", True)
     profile.set_preference("browser.link.open_newwindow.restriction", 0)
+
     print("Starting Firefox")
     driver = webdriver.Firefox(profile)
+
     print("Travelling to Distance Education ITT Tech")
     driver.get('http://distance-education.itt-tech.edu/')
     login = driver.find_element_by_name("fblogincd")
@@ -55,15 +59,18 @@ def main():
     del login
     del lpass
     driver.find_element_by_css_selector("input#sImage1").click()
+
     print("Logging in...")
     time.sleep(8)
     links = driver.find_elements_by_class_name("CLiKSTdLnkB")
+
     print("Finding your class...")
     links[whatclass].click()
     booktitle = driver.find_element_by_class_name("CLiKSLpNrmlLnk_Ebook").text
     print(booktitle.title())
     driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 'n')
     driver.switch_to.window(driver.window_handles[-1])
+
     print("Getting number of Pages...")
     driver.get('https://www.amazon.com')
     driver.find_element_by_css_selector("input#twotabsearchtextbox.nav-input").send_keys(booktitle)
@@ -79,17 +86,19 @@ def main():
     print(truepages)
     driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + 'w')
 
+    if pubrestriction > 1:
+        begin = 1
+        end = begin + (pubrestriction - 1)
+    elif pubrestriction == 0:
+        begin = 1
+        end = truepages / 2
+
     print("Initializing Downloading Loop")
     # after amazon gets done with finding page count
     driver.switch_to.window(driver.window_handles[-1])
     driver.find_element_by_class_name("CLiKSLpNrmlLnk_Ebook").click()
     time.sleep(8)
     driver.switch_to.window(driver.window_handles[-1])
-    begin = 1
-    end = 11
-    filen = 'a'  # base filename
-    filec = 0  # filename counterhttps://github.com/SumoClusters/QEDownloader.git
-    filep = filen + str(filec) + ".pdf"  # perfect filename
     pdf = home + "/PDF"
     if not os.path.exists(pdf):
         os.mkdir(pdf)
@@ -120,8 +129,15 @@ def main():
                     os.rename(filename, filep)
             filec += 1
             filep = filen + str(filec) + ".pdf"
-            begin += 10
-            end += 10
+            if pubrestriction > 1:
+                begin += pubrestriction
+                end += pubrestriction
+            elif pubrestriction == 0:
+                begin += end + 1
+                end2 = end
+                for i in range(end2, truepages):
+                    end = i
+
 
     print("Finished, enjoy your book! ^-^")
 
@@ -150,4 +166,5 @@ if __name__ == '__main__':
     https://www.binpress.com/tutorial/manipulating-pdfs-with-python/167
     https://support.mozilla.org/en-US/questions/1035103
     https://stackoverflow.com/questions/14411028/python-printing-attributes-with-no-dict
+    http://pythoncentral.io/pythons-range-function-explained/
 """
